@@ -1,0 +1,89 @@
+import "./login.css";
+import { User, Store, Shield } from "lucide-react";
+
+function Login() {
+  return (
+    <div className="login-page">
+
+      <div className="container-fluid ">
+        <div className="row h-100">
+
+          {/* LEFT */}
+          <div className="col-md-6 d-none d-md-flex left-panel">
+            <div style={{padding: 100}}>
+              <img
+                src="/src/assets/logo.png"
+                alt="logo"
+                className="logo mb-4"
+                style={{ width: "250px" }}
+              />
+
+              <h1 className="fw-bold">Welcome to ReadNest</h1>
+
+              <p className="mt-3">
+                Discover, manage, and explore the world of books.
+              </p>
+
+              <ul className="mt-4">
+                <li>Browse thousands of books</li>
+                <li>Manage inventory</li>
+                <li>Track analytics</li>
+              </ul>
+            </div>
+          </div>
+
+          {/* RIGHT */}
+          <div className="col-md-6 col-12 d-flex align-items-center justify-content-center">
+            <div className="right-panel">
+
+              {/* TOGGLE */}
+              <div className="toggle">
+                <button className="active">Login</button>
+                <button>Register</button>
+              </div>
+
+              <form className="mt-4">
+
+                <label>Email Address</label>
+                <input type="email" placeholder="you@example.com" />
+
+                <label>Password</label>
+                <input type="password" placeholder="••••••••" />
+
+                <label className="mt-3">Select Role</label>
+
+                <div className="role-container">
+                  <div className="role active">
+                    <User className="role-icon" />
+                    <span>Reader</span>
+                  </div>
+
+                  <div className="role">
+                    <Store className="role-icon" />
+                    <span>Shop Owner</span>
+                  </div>
+
+                  <div className="role">
+                    <Shield className="role-icon" />
+                    <span>Admin</span>
+                  </div>
+                </div>
+
+                <button className="login-btn mt-4">Login</button>
+
+                <p className="text-center mt-3">
+                  <a href="#" style={{textDecoration: "none", color: "#d4b100"}}>Forgot your password?</a>
+                </p>
+
+              </form>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  );
+}
+
+export default Login;
