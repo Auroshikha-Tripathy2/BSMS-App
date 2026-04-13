@@ -7,7 +7,7 @@ function Navbar() {
       {/* NAVBAR */}
       <nav
         className="navbar bg-white shadow-sm d-flex justify-content-between align-items-center"
-        style={{ padding: "1.8rem 6rem" }}   // 🔥 more spacing
+        style={{ padding: "1.8rem 6rem" }}  
       >
         {/* LEFT (Logo → opens menu) */}
         <button className="btn border-0" data-bs-toggle="offcanvas" data-bs-target="#menu"  >
