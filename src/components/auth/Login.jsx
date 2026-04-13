@@ -1,23 +1,26 @@
 import "../../styles/login.css";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { User, Store, Shield } from "lucide-react";
+import { useNavigate, Link } from "react-router-dom";
+import { User, Store } from "lucide-react";
+import logo from "../../assets/logo.png"; // ✅ fixed path
 
 function Login() {
-  const navigate = useNavigate();          // ✅ FIX
-  const [role, setRole] = useState("");    // ✅ FIX
+  const navigate = useNavigate();
+
+  const [role, setRole] = useState("");
+  const [showOtp, setShowOtp] = useState(false);
+  const [otp, setOtp] = useState("");
 
   return (
     <div className="login-page">
-
-      <div className="container-fluid ">
+      <div className="container-fluid">
         <div className="row h-100">
 
           {/* LEFT */}
           <div className="col-md-6 d-none d-md-flex left-panel">
-            <div style={{padding: 100}}>
+            <div style={{ padding: 100 }}>
               <img
-                src="/src/assets/logo.png"
+                src={logo}
                 alt="logo"
                 className="logo mb-4"
                 style={{ width: "250px" }}
@@ -44,60 +47,95 @@ function Login() {
               {/* TOGGLE */}
               <div className="toggle">
                 <button className="active">Login</button>
-                <button onClick={() => navigate("/register")}>Register</button>
+                <button onClick={() => navigate("/register")}>
+                  Register
+                </button>
               </div>
 
               <form className="mt-4">
 
                 <label>Email Address</label>
                 <input type="email" placeholder="you@example.com" />
+               
+                {/* ROLE */}
+                {!showOtp && (
+                  <>
 
-                <label>Password</label>
-                <input type="password" placeholder="••••••••" />
+                    <label>Password</label>
+                    <input type="password" placeholder="••••••••" />
 
-                <label className="mt-3">Select Role</label>
+                    <label className="mt-3">Select Role</label>
 
-                <div className="role-container">
+                    <div className="role-container">
+                      <div
+                        className={`role ${role === "reader" ? "active" : ""}`}
+                        onClick={() => setRole("reader")}
+                      >
+                        <User size={28} />
+                        <span>Reader</span>
+                      </div>
 
-                  <div 
-                    className={`role ${role === "reader" ? "active" : ""}`}
-                    onClick={() => setRole("reader")}
-                  >
-                    <User size={28} className="role-icon" />
-                    <span>Reader</span>
-                  </div>
+                      <div
+                        className={`role ${role === "owner" ? "active" : ""}`}
+                        onClick={() => setRole("owner")}
+                      >
+                        <Store size={28} />
+                        <span>Shop Owner</span>
+                      </div>
+                    </div>
+                  </>
+                )}
 
-                  <div 
-                    className={`role ${role === "owner" ? "active" : ""}`}
-                    onClick={() => setRole("owner")}
-                  >
-                    <Store size={28} className="role-icon" />
-                    <span>Shop Owner</span>
-                  </div>
+                {/* OTP FIELD */}
+                {showOtp && (
+                  <>
+                    <label className="mt-3">Enter OTP</label>
+                    <input
+                      type="text"
+                      placeholder="Enter OTP"
+                      value={otp}
+                      onChange={(e) => setOtp(e.target.value)}
+                    />
+                  </>
+                )}
 
-                  <div 
-                    className={`role ${role === "admin" ? "active" : ""}`}
-                    onClick={() => setRole("admin")}
-                  >
-                    <Shield size={28} className="role-icon" />
-                    <span>Admin</span>
-                  </div>
+                {/* BUTTON */}
+                <button className="login-btn mt-4">
+                  {showOtp ? "Verify OTP" : "Login"}
+                </button>
 
-                </div>
-
-                <button className="login-btn mt-4">Login</button>
-
-                <p className="text-center mt-3">
-                  <a href="#" style={{textDecoration: "none", color: "#d4b100"}}>Forgot your password?</a>
-                </p>
+                {/* FORGOT PASSWORD */}
+                {!showOtp && (
+                  <p className="text-center mt-3">
+                    <span
+                      onClick={() => setShowOtp(true)}
+                      style={{
+                        cursor: "pointer",
+                        color: "#d4b100"
+                      }}
+                    >
+                      Forgot your password?
+                    </span>
+                  </p>
+                )}
 
               </form>
+
+              {/* ADMIN LOGIN */}
+              <p className="text-center mt-3">
+                <Link
+                  to="/admin-login"
+                  style={{ textDecoration: "none", color: "#d4b100" }}
+                >
+                  Admin Login
+                </Link>
+              </p>
+
             </div>
           </div>
 
         </div>
       </div>
-
     </div>
   );
 }
