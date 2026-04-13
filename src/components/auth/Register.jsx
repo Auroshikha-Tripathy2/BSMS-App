@@ -5,8 +5,8 @@ import { User, Store, Shield } from "lucide-react";
 import logo from "../../assets/logo.png"; 
 
 function Register() {
-  const navigate = useNavigate();          // ✅ FIX
-  const [role, setRole] = useState("");    // ✅ FIX
+  const navigate = useNavigate();          
+  const [role, setRole] = useState("");    
 
   return (
     <div className="register-page">
@@ -17,7 +17,7 @@ function Register() {
           <div className="col-md-6 d-none d-md-flex left-panel">
             <div style={{ padding: 100 }}>
               <img
-                src={logo}   // ✅ FIX
+                src={logo}   
                 alt="logo"
                 className="logo mb-4"
                 style={{ width: "250px" }}
@@ -81,13 +81,6 @@ function Register() {
                     <span>Shop Owner</span>
                   </div>
 
-                  <div
-                    className={`role ${role === "admin" ? "active" : ""}`}
-                    onClick={() => setRole("admin")}
-                  >
-                    <Shield size={28} />
-                    <span>Admin</span>
-                  </div>
 
                 </div>
 
