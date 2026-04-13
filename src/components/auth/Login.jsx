@@ -1,4 +1,4 @@
-import "./login.css";
+import "../../styles/login.css"
 import { User, Store, Shield } from "lucide-react";
 
 function Login() {
