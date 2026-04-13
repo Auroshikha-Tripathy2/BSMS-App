@@ -1,7 +1,12 @@
-import "../../styles/login.css"
+import "../../styles/login.css";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { User, Store, Shield } from "lucide-react";
 
 function Login() {
+  const navigate = useNavigate();          // ✅ FIX
+  const [role, setRole] = useState("");    // ✅ FIX
+
   return (
     <div className="login-page">
 
@@ -39,7 +44,7 @@ function Login() {
               {/* TOGGLE */}
               <div className="toggle">
                 <button className="active">Login</button>
-                <button>Register</button>
+                <button onClick={() => navigate("/register")}>Register</button>
               </div>
 
               <form className="mt-4">
@@ -53,20 +58,31 @@ function Login() {
                 <label className="mt-3">Select Role</label>
 
                 <div className="role-container">
-                  <div className="role active">
-                    <User className="role-icon" />
+
+                  <div 
+                    className={`role ${role === "reader" ? "active" : ""}`}
+                    onClick={() => setRole("reader")}
+                  >
+                    <User size={28} className="role-icon" />
                     <span>Reader</span>
                   </div>
 
-                  <div className="role">
-                    <Store className="role-icon" />
+                  <div 
+                    className={`role ${role === "owner" ? "active" : ""}`}
+                    onClick={() => setRole("owner")}
+                  >
+                    <Store size={28} className="role-icon" />
                     <span>Shop Owner</span>
                   </div>
 
-                  <div className="role">
-                    <Shield className="role-icon" />
+                  <div 
+                    className={`role ${role === "admin" ? "active" : ""}`}
+                    onClick={() => setRole("admin")}
+                  >
+                    <Shield size={28} className="role-icon" />
                     <span>Admin</span>
                   </div>
+
                 </div>
 
                 <button className="login-btn mt-4">Login</button>
