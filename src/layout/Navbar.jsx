@@ -1,37 +1,52 @@
+import React from "react";
 import { Link } from "react-router-dom";
 import { Heart, ShoppingCart, User, Settings, LogOut, Store, ChartSpline  } from "lucide-react";
+import logo from "../assets/logo.png";
+import "../styles/pages.css";
 
 function Navbar() {
   return (
     <>
       {/* NAVBAR */}
-      <nav
-        className="navbar bg-white shadow-sm d-flex justify-content-between align-items-center"
-        style={{ padding: "1.8rem 6rem" }}  
-      >
+      <nav className="navbar app-navbar bg-white shadow-sm">
         {/* LEFT (Logo → opens menu) */}
-        <button className="btn border-0" data-bs-toggle="offcanvas" data-bs-target="#menu"  >
-          <img  src="src/assets/logo.png"   alt="Logo"   style={{ width: "110px" }}  />
-        </button>
+        <div className="app-navbar-left">
+          <button className="btn border-0 p-0" data-bs-toggle="offcanvas" data-bs-target="#menu">
+            <img src={logo} alt="Logo" style={{ width: "110px" }} />
+          </button>
+          <Link to="/" className="app-navbar-home text-decoration-none text-dark fw-bold">
+            Home
+          </Link>
+          <Link to="/reader" className="app-navbar-link text-decoration-none text-dark">
+            Reader
+          </Link>
+          <Link to="/shopkeeper" className="app-navbar-link text-decoration-none text-dark">
+            Shopkeeper
+          </Link>
+        </div>
 
         {/* CENTER (Search) */}
-        <div style={{ width: "70%" }}>
-          <input type="text" className="form-control" placeholder="Search books, authors..." 
-                  style={{ padding: "0.6rem 1rem", fontSize: "1rem" }}/>
+        <div className="app-navbar-search">
+          <input
+            type="text"
+            className="form-control"
+            placeholder="Search books, authors..."
+            style={{ padding: "0.85rem 1rem", fontSize: "1rem" }}
+          />
         </div>
 
         {/* RIGHT */}
-        <div className="d-flex align-items-center gap-4">
+        <div className="app-navbar-right">
           
-          <Link to="/wishlist">
+          <Link to="/wishlist" className="app-navbar-icon">
             <Heart size={22}/>
           </Link>
 
-          <Link to="/cart">
+          <Link to="/cart" className="app-navbar-icon">
             <ShoppingCart size={22} />
           </Link>
 
-          <Link to="/shops" className="btn btn-warning">
+          <Link to="/shops" className="btn btn-warning app-shop-btn">
             <Store size={20} /> Shop
           </Link>
         </div>
@@ -56,6 +71,14 @@ function Navbar() {
 
           <Link to="/status" className="d-block mb-3 text-dark text-decoration-none" style={{ fontWeight: "1000", padding: "0.5rem 1rem", display: "inline-block"}}>
             <ChartSpline size={20} /> Reading Status
+          </Link>
+
+          <Link to="/reader" className="d-block mb-3 text-dark text-decoration-none" style={{ fontWeight: "1000", padding: "0.5rem 1rem", display: "inline-block"}}>
+            <User /> Reader View
+          </Link>
+
+          <Link to="/shopkeeper" className="d-block mb-3 text-dark text-decoration-none" style={{ fontWeight: "1000", padding: "0.5rem 1rem", display: "inline-block"}}>
+            <Store size={20} /> Shopkeeper View
           </Link>
 
           <hr />

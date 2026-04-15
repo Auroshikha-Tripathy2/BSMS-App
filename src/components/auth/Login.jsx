@@ -1,5 +1,5 @@
 import "../../styles/login.css";
-import { useState } from "react";
+import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { User, Store } from "lucide-react";
 import logo from "../../assets/logo.png"; // ✅ fixed path
