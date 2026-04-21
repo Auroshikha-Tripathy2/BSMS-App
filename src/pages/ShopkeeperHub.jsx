@@ -1,10 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { ArrowUpRight, ClipboardList, PackageSearch, Store } from "lucide-react";
+import { featuredBooks } from "../data/books";
 import {
   businessInsights,
   shopkeeperFeatures,
-  shopkeeperMetrics,
   shopkeeperTasks,
 } from "../data/perspectives";
 import "../styles/pages.css";
@@ -36,13 +36,23 @@ function ShopkeeperHub() {
             <span>Store overview</span>
           </div>
 
-          <div className="metric-grid compact">
-            {shopkeeperMetrics.map((item) => (
-              <div key={item.label} className="metric-card">
-                <strong>{item.value}</strong>
-                <span>{item.label}</span>
-              </div>
+          <div className="cover-showcase store-showcase">
+            {featuredBooks.slice(2, 6).map((book, index) => (
+              <img
+                key={book.id}
+                className={`showcase-book showcase-book-${index + 1}`}
+                src={book.cover}
+                alt={book.title}
+              />
             ))}
+          </div>
+
+          <div className="panel-callout">
+            <strong>Sign in to view real store metrics and inventory activity.</strong>
+            <span>
+              Orders, stock levels, low-stock alerts, and repeat buyers should only
+              appear inside the authenticated shopkeeper dashboard.
+            </span>
           </div>
         </div>
       </section>

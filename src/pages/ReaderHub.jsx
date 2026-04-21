@@ -6,7 +6,6 @@ import {
   readerActions,
   readerFeatures,
   readerInsights,
-  readerMetrics,
 } from "../data/perspectives";
 import "../styles/pages.css";
 
@@ -37,13 +36,23 @@ function ReaderHub() {
             <span>Reader command bar</span>
           </div>
 
-          <div className="metric-grid compact">
-            {readerMetrics.map((item) => (
-              <div key={item.label} className="metric-card">
-                <strong>{item.value}</strong>
-                <span>{item.label}</span>
-              </div>
+          <div className="cover-showcase">
+            {featuredBooks.slice(0, 4).map((book, index) => (
+              <img
+                key={book.id}
+                className={`showcase-book showcase-book-${index + 1}`}
+                src={book.cover}
+                alt={book.title}
+              />
             ))}
+          </div>
+
+          <div className="panel-callout">
+            <strong>Sign in to unlock your personal reader dashboard.</strong>
+            <span>
+              Wishlist, reading progress, price alerts, and order activity will
+              appear after login.
+            </span>
           </div>
         </div>
       </section>

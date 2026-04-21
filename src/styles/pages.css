@@ -492,6 +492,7 @@
   background: linear-gradient(180deg, #0d0842 0%, #17115c 100%);
   color: white;
   box-shadow: 0 18px 40px rgba(13, 8, 66, 0.16);
+  overflow: hidden;
 }
 
 .perspective-panel-head,
@@ -525,6 +526,84 @@
 
 .metric-card span {
   color: rgba(255, 255, 255, 0.75);
+}
+
+.cover-showcase {
+  position: relative;
+  min-height: 280px;
+  margin-top: 0.75rem;
+}
+
+.showcase-book {
+  position: absolute;
+  width: 130px;
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+  border-radius: 18px;
+  border: 3px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 16px 30px rgba(0, 0, 0, 0.28);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.showcase-book-1 {
+  left: 0;
+  top: 30px;
+  transform: rotate(-10deg);
+}
+
+.showcase-book-2 {
+  left: 90px;
+  top: 0;
+  z-index: 2;
+  transform: rotate(-2deg);
+}
+
+.showcase-book-3 {
+  left: 190px;
+  top: 40px;
+  z-index: 3;
+  transform: rotate(7deg);
+}
+
+.showcase-book-4 {
+  left: 305px;
+  top: 10px;
+  transform: rotate(13deg);
+}
+
+.store-showcase .showcase-book-1 {
+  top: 12px;
+}
+
+.store-showcase .showcase-book-2 {
+  top: 48px;
+}
+
+.store-showcase .showcase-book-3 {
+  top: 2px;
+}
+
+.store-showcase .showcase-book-4 {
+  top: 54px;
+}
+
+.panel-callout {
+  margin-top: 0.5rem;
+  padding: 1rem 1.1rem;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  display: grid;
+  gap: 0.45rem;
+}
+
+.panel-callout strong {
+  font-size: 1rem;
+}
+
+.panel-callout span {
+  color: rgba(255, 255, 255, 0.78);
+  line-height: 1.6;
 }
 
 .task-item {
@@ -586,5 +665,25 @@
   .dual-feature-layout,
   .perspective-hero {
     grid-template-columns: 1fr;
+  }
+
+  .cover-showcase {
+    min-height: 250px;
+  }
+
+  .showcase-book {
+    width: 110px;
+  }
+
+  .showcase-book-2 {
+    left: 72px;
+  }
+
+  .showcase-book-3 {
+    left: 146px;
+  }
+
+  .showcase-book-4 {
+    left: 230px;
   }
 }
