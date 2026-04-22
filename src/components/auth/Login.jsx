@@ -48,8 +48,6 @@ function Login() {
       setLoading(false);
     }
   };
-  const [error, setError] = useState("");
-  const [loading, setLoading] = useState(false);
 
   return (
     <div className="login-page">
