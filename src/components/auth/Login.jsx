@@ -28,28 +28,22 @@ function Login() {
     setLoading(true);
 
     try {
-      // Mock API call - replace with real backend call
-      const token = "mock-jwt-token-" + Date.now();
-      const userData = {
-        id: Math.random().toString(36).substr(2, 9),
-        name: email.split("@")[0],
-        email: email,
-        role: role,
-        phone: "",
-        address: "",
-      };
+      const result = await login(email, password);
 
-      // Call login from context
-      login(userData, role, token);
-
-      // Navigate based on role
-      if (role === "reader") {
-        navigate("/reader");
-      } else if (role === "owner") {
-        navigate("/shopkeeper");
+      if (result.success) {
+        // Navigate based on role
+        if (result.role === "reader") {
+          navigate("/reader");
+        } else if (result.role === "owner") {
+          navigate("/shopkeeper");
+        } else {
+          navigate("/");
+        }
+      } else {
+        setError(result.error || "Login failed");
       }
     } catch (err) {
-      setError("Login failed. Please try again.");
+      setError("An error occurred during login");
     } finally {
       setLoading(false);
     }
