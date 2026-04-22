@@ -2,14 +2,60 @@ import "../../styles/login.css";
 import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { User, Store } from "lucide-react";
+import { useAuth } from "../../hooks/useAuth";
 import logo from "../../assets/logo.png"; // ✅ fixed path
 
 function Login() {
   const navigate = useNavigate();
+  const { login } = useAuth();
 
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [role, setRole] = useState("");
   const [showOtp, setShowOtp] = useState(false);
-  const [otp, setOtp] = useState("");
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    setError("");
+
+    if (!email || !password || !role) {
+      setError("Please fill in all fields and select a role");
+      return;
+    }
+
+    setLoading(true);
+
+    try {
+      // Mock API call - replace with real backend call
+      const token = "mock-jwt-token-" + Date.now();
+      const userData = {
+        id: Math.random().toString(36).substr(2, 9),
+        name: email.split("@")[0],
+        email: email,
+        role: role,
+        phone: "",
+        address: "",
+      };
+
+      // Call login from context
+      login(userData, role, token);
+
+      // Navigate based on role
+      if (role === "reader") {
+        navigate("/reader");
+      } else if (role === "owner") {
+        navigate("/shopkeeper");
+      }
+    } catch (err) {
+      setError("Login failed. Please try again.");
+    } finally {
+      setLoading(false);
+    }
+  };
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
 
   return (
     <div className="login-page">
@@ -52,24 +98,42 @@ function Login() {
                 </button>
               </div>
 
-              <form className="mt-4">
+              <form className="mt-4" onSubmit={handleLogin}>
+
+                {error && (
+                  <div className="alert alert-danger" role="alert">
+                    {error}
+                  </div>
+                )}
 
                 <label>Email Address</label>
-                <input type="email" placeholder="you@example.com" />
+                <input
+                  type="email"
+                  placeholder="you@example.com"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  disabled={showOtp || loading}
+                />
                
                 {/* ROLE */}
                 {!showOtp && (
                   <>
 
                     <label>Password</label>
-                    <input type="password" placeholder="••••••••" />
+                    <input
+                      type="password"
+                      placeholder="••••••••"
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
+                      disabled={loading}
+                    />
 
                     <label className="mt-3">Select Role</label>
 
                     <div className="role-container">
                       <div
                         className={`role ${role === "reader" ? "active" : ""}`}
-                        onClick={() => setRole("reader")}
+                        onClick={() => !loading && setRole("reader")}
                       >
                         <User size={28} />
                         <span>Reader</span>
@@ -77,7 +141,7 @@ function Login() {
 
                       <div
                         className={`role ${role === "owner" ? "active" : ""}`}
-                        onClick={() => setRole("owner")}
+                        onClick={() => !loading && setRole("owner")}
                       >
                         <Store size={28} />
                         <span>Shop Owner</span>
@@ -95,22 +159,27 @@ function Login() {
                       placeholder="Enter OTP"
                       value={otp}
                       onChange={(e) => setOtp(e.target.value)}
+                      disabled={loading}
                     />
                   </>
                 )}
 
                 {/* BUTTON */}
-                <button className="login-btn mt-4">
-                  {showOtp ? "Verify OTP" : "Login"}
+                <button
+                  type="submit"
+                  className="login-btn mt-4"
+                  disabled={loading}
+                >
+                  {loading ? "Logging in..." : showOtp ? "Verify OTP" : "Login"}
                 </button>
 
                 {/* FORGOT PASSWORD */}
                 {!showOtp && (
                   <p className="text-center mt-3">
                     <span
-                      onClick={() => setShowOtp(true)}
+                      onClick={() => !loading && setShowOtp(true)}
                       style={{
-                        cursor: "pointer",
+                        cursor: loading ? "not-allowed" : "pointer",
                         color: "#d4b100"
                       }}
                     >
