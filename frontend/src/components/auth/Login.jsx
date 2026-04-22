@@ -1,12 +1,19 @@
 import "../../styles/login.css";
+<<<<<<< HEAD
 import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { User, Store } from "lucide-react";
 import { useAuth } from "../../hooks/useAuth";
+=======
+import { useState } from "react";
+import { useNavigate, Link } from "react-router-dom";
+import { User, Store } from "lucide-react";
+>>>>>>> 0181b91 (Dashboard-FE)
 import logo from "../../assets/logo.png"; // ✅ fixed path
 
 function Login() {
   const navigate = useNavigate();
+<<<<<<< HEAD
   const { login } = useAuth();
 
   const [email, setEmail] = useState("");
@@ -48,6 +55,12 @@ function Login() {
       setLoading(false);
     }
   };
+=======
+
+  const [role, setRole] = useState("");
+  const [showOtp, setShowOtp] = useState(false);
+  const [otp, setOtp] = useState("");
+>>>>>>> 0181b91 (Dashboard-FE)
 
   return (
     <div className="login-page">
@@ -90,6 +103,7 @@ function Login() {
                 </button>
               </div>
 
+<<<<<<< HEAD
               <form className="mt-4" onSubmit={handleLogin}>
 
                 {error && (
@@ -106,12 +120,19 @@ function Login() {
                   onChange={(e) => setEmail(e.target.value)}
                   disabled={showOtp || loading}
                 />
+=======
+              <form className="mt-4">
+
+                <label>Email Address</label>
+                <input type="email" placeholder="you@example.com" />
+>>>>>>> 0181b91 (Dashboard-FE)
                
                 {/* ROLE */}
                 {!showOtp && (
                   <>
 
                     <label>Password</label>
+<<<<<<< HEAD
                     <input
                       type="password"
                       placeholder="••••••••"
@@ -119,13 +140,20 @@ function Login() {
                       onChange={(e) => setPassword(e.target.value)}
                       disabled={loading}
                     />
+=======
+                    <input type="password" placeholder="••••••••" />
+>>>>>>> 0181b91 (Dashboard-FE)
 
                     <label className="mt-3">Select Role</label>
 
                     <div className="role-container">
                       <div
                         className={`role ${role === "reader" ? "active" : ""}`}
+<<<<<<< HEAD
                         onClick={() => !loading && setRole("reader")}
+=======
+                        onClick={() => setRole("reader")}
+>>>>>>> 0181b91 (Dashboard-FE)
                       >
                         <User size={28} />
                         <span>Reader</span>
@@ -133,7 +161,11 @@ function Login() {
 
                       <div
                         className={`role ${role === "owner" ? "active" : ""}`}
+<<<<<<< HEAD
                         onClick={() => !loading && setRole("owner")}
+=======
+                        onClick={() => setRole("owner")}
+>>>>>>> 0181b91 (Dashboard-FE)
                       >
                         <Store size={28} />
                         <span>Shop Owner</span>
@@ -151,27 +183,41 @@ function Login() {
                       placeholder="Enter OTP"
                       value={otp}
                       onChange={(e) => setOtp(e.target.value)}
+<<<<<<< HEAD
                       disabled={loading}
+=======
+>>>>>>> 0181b91 (Dashboard-FE)
                     />
                   </>
                 )}
 
                 {/* BUTTON */}
+<<<<<<< HEAD
                 <button
                   type="submit"
                   className="login-btn mt-4"
                   disabled={loading}
                 >
                   {loading ? "Logging in..." : showOtp ? "Verify OTP" : "Login"}
+=======
+                <button className="login-btn mt-4">
+                  {showOtp ? "Verify OTP" : "Login"}
+>>>>>>> 0181b91 (Dashboard-FE)
                 </button>
 
                 {/* FORGOT PASSWORD */}
                 {!showOtp && (
                   <p className="text-center mt-3">
                     <span
+<<<<<<< HEAD
                       onClick={() => !loading && setShowOtp(true)}
                       style={{
                         cursor: loading ? "not-allowed" : "pointer",
+=======
+                      onClick={() => setShowOtp(true)}
+                      style={{
+                        cursor: "pointer",
+>>>>>>> 0181b91 (Dashboard-FE)
                         color: "#d4b100"
                       }}
                     >
@@ -201,4 +247,8 @@ function Login() {
   );
 }
 
+<<<<<<< HEAD
 export default Login;
+=======
+export default Login;
+>>>>>>> 0181b91 (Dashboard-FE)

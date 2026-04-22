@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Heart, ShoppingCart, User, Settings, LogOut, Store, ChartSpline  } from "lucide-react";
@@ -110,6 +111,42 @@ function Navbar() {
           )}
 
           <Link to="/shops" className="btn btn-warning app-shop-btn">
+=======
+import { Link } from "react-router-dom";
+import { Heart, ShoppingCart, User, Settings, LogOut, Store, ChartSpline  } from "lucide-react";
+
+function Navbar() {
+  return (
+    <>
+      {/* NAVBAR */}
+      <nav
+        className="navbar bg-white shadow-sm d-flex justify-content-between align-items-center"
+        style={{ padding: "1.8rem 6rem" }}  
+      >
+        {/* LEFT (Logo → opens menu) */}
+        <button className="btn border-0" data-bs-toggle="offcanvas" data-bs-target="#menu"  >
+          <img  src="src/assets/logo.png"   alt="Logo"   style={{ width: "110px" }}  />
+        </button>
+
+        {/* CENTER (Search) */}
+        <div style={{ width: "70%" }}>
+          <input type="text" className="form-control" placeholder="Search books, authors..." 
+                  style={{ padding: "0.6rem 1rem", fontSize: "1rem" }}/>
+        </div>
+
+        {/* RIGHT */}
+        <div className="d-flex align-items-center gap-4">
+          
+          <Link to="/wishlist">
+            <Heart size={22}/>
+          </Link>
+
+          <Link to="/cart">
+            <ShoppingCart size={22} />
+          </Link>
+
+          <Link to="/shops" className="btn btn-warning">
+>>>>>>> 0181b91 (Dashboard-FE)
             <Store size={20} /> Shop
           </Link>
         </div>
@@ -124,6 +161,7 @@ function Navbar() {
 
         <div className="offcanvas-body">
 
+<<<<<<< HEAD
           {isAuthenticated && (
             <>
               <Link to="/account" className="d-block mb-3 text-dark text-decoration-none" style={{ fontWeight: "1000", padding: "0.5rem 1rem", display: "inline-block"}}>
@@ -166,6 +204,25 @@ function Navbar() {
               </button>
             </>
           )}
+=======
+          <Link to="/account" className="d-block mb-3 text-dark text-decoration-none" style={{ fontWeight: "1000", padding: "0.5rem 1rem", display: "inline-block"}}>
+            <User /> Account
+          </Link>
+
+          <Link to="/settings" className="d-block mb-3 text-dark text-decoration-none" style={{ fontWeight: "1000", padding: "0.5rem 1rem", display: "inline-block"}}>
+            <Settings /> Settings
+          </Link>
+
+          <Link to="/status" className="d-block mb-3 text-dark text-decoration-none" style={{ fontWeight: "1000", padding: "0.5rem 1rem", display: "inline-block"}}>
+            <ChartSpline size={20} /> Reading Status
+          </Link>
+
+          <hr />
+
+          <Link to="/logout" className="text-danger text-decoration-none" style={{ fontWeight: "1000", padding: "0.5rem 1rem", display: "inline-block"}}>
+            <LogOut /> Logout
+          </Link>
+>>>>>>> 0181b91 (Dashboard-FE)
 
         </div>
       </div>
@@ -173,4 +230,8 @@ function Navbar() {
   );
 }
 
+<<<<<<< HEAD
 export default Navbar;
+=======
+export default Navbar;
+>>>>>>> 0181b91 (Dashboard-FE)

@@ -1,5 +1,9 @@
 import "../../styles/login.css";
+<<<<<<< HEAD
 import React, { useState } from "react";
+=======
+import { useState } from "react";
+>>>>>>> 0181b91 (Dashboard-FE)
 import { useNavigate } from "react-router-dom";
 import { User, Store, Shield } from "lucide-react";
 import logo from "../../assets/logo.png"; 
@@ -96,4 +100,8 @@ function Register() {
   );
 }
 
+<<<<<<< HEAD
 export default Register;
+=======
+export default Register;
+>>>>>>> 0181b91 (Dashboard-FE)

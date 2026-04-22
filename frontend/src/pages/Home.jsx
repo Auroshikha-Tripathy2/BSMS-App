@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React from "react";
 import { Link } from "react-router-dom";
 import { BookOpen, Star, Truck, ShieldCheck, Sparkles } from "lucide-react";
@@ -242,3 +243,19 @@ function Home() {
 }
 
 export default Home;
+=======
+import { Outlet } from "react-router-dom";
+import Banner from "./Banner";
+// import Footer from "./Footer";
+
+function Layout() {
+  return (
+    <>
+        <Banner />
+      {/* <Footer /> */}
+    </>
+  );
+}
+
+export default Layout;
+>>>>>>> 0181b91 (Dashboard-FE)
