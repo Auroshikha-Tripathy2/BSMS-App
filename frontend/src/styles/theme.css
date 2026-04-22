@@ -1,0 +1,18 @@
+:root {
+  --primary: #FFCE1A;
+  --secondary: #0D0842;
+  --bg: #F3F3F3;
+  --favorite: #FF5841;
+
+  --font-primary: "Montserrat", sans-serif;
+  --font-secondary: "Nunito Sans", sans-serif;
+}
+
+/* reusable */
+.bg-primary-custom {
+  background-color: var(--primary);
+}
+
+.text-secondary-custom {
+  color: var(--secondary);
+}
