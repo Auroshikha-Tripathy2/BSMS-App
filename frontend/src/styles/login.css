@@ -130,6 +130,14 @@ input {
   background: #fffbea;
 }
 
+<<<<<<< HEAD
+=======
+.role:hover {
+  border: 1px solid #332305; /* keep normal */
+  background: #fffbea; /* same as active bg */
+}
+
+>>>>>>> 0181b91 (Dashboard-FE)
 /* BUTTON */
 .login-btn {
   width: 100%;
