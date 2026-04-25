@@ -1,8 +1,8 @@
-import "../../styles/login.css";
 import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { useAuth } from "../../hooks/useAuth";
 import logo from "../../assets/logo.png";
+import "../../styles/login.css";
 
 function Login() {
   const navigate = useNavigate();
@@ -26,9 +26,7 @@ function Login() {
     try {
       const result = await login(email, password);
       if (result.success) {
-        if (result.role === "reader") navigate("/");
-        else if (result.role === "owner") navigate("/");
-        else navigate("/");
+        navigate("/");
       } else {
         setError(result.error || "Login failed");
       }
@@ -76,6 +74,7 @@ function Login() {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               disabled={loading}
+              required
             />
 
             <label>Password</label>
@@ -85,6 +84,7 @@ function Login() {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               disabled={loading}
+              required
             />
 
             <button type="submit" className="auth-submit-btn" disabled={loading}>

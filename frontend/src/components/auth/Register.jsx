@@ -1,9 +1,9 @@
-import "../../styles/login.css";
 import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { User, Store } from "lucide-react";
 import { useAuth } from "../../hooks/useAuth";
 import logo from "../../assets/logo.png";
+import "../../styles/login.css";
 
 function Register() {
   const navigate = useNavigate();
@@ -88,6 +88,7 @@ function Register() {
               value={name}
               onChange={(e) => setName(e.target.value)}
               disabled={loading}
+              required
             />
 
             <label>Email Address</label>
@@ -97,6 +98,7 @@ function Register() {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               disabled={loading}
+              required
             />
 
             <label>Password</label>
@@ -106,6 +108,7 @@ function Register() {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               disabled={loading}
+              required
             />
 
             <label>Confirm Password</label>
@@ -115,6 +118,7 @@ function Register() {
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
               disabled={loading}
+              required
             />
 
             <label>Phone Number (Optional)</label>

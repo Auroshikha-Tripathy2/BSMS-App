@@ -1,4 +1,7 @@
+<<<<<<< HEAD
 import React from "react";
+=======
+>>>>>>> 0181b91 (Dashboard-FE)
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import App from './App.jsx'
@@ -13,4 +16,8 @@ createRoot(document.getElementById('root')).render(
   <StrictMode>
     <App />
   </StrictMode>,
+<<<<<<< HEAD
 )
+=======
+)
+>>>>>>> 0181b91 (Dashboard-FE)
