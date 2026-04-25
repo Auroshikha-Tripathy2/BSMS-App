@@ -1,23 +1,16 @@
-<<<<<<< HEAD
 import React from "react";
-=======
->>>>>>> 0181b91 (Dashboard-FE)
-import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
-import App from './App.jsx'
+import { StrictMode } from "react";
+import { createRoot } from "react-dom/client";
+import App from "./App.jsx";
 
 // CSS
-import 'bootstrap/dist/css/bootstrap.min.css'
-import 'bootstrap/dist/js/bootstrap.bundle.min.js'
-import './styles/theme.css'
-import './index.css'
+import "bootstrap/dist/css/bootstrap.min.css";
+import "bootstrap/dist/js/bootstrap.bundle.min.js";
+import "./styles/theme.css";
+import "./index.css";
 
-createRoot(document.getElementById('root')).render(
+createRoot(document.getElementById("root")).render(
   <StrictMode>
     <App />
-  </StrictMode>,
-<<<<<<< HEAD
-)
-=======
-)
->>>>>>> 0181b91 (Dashboard-FE)
+  </StrictMode>
+);

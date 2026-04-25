@@ -1,12 +1,7 @@
-import "../../styles/login.css";
-<<<<<<< HEAD
 import React from "react";
-=======
-import { useState } from "react";
->>>>>>> 0181b91 (Dashboard-FE)
 import { useNavigate } from "react-router-dom";
-import { User, Store, Shield } from "lucide-react";
-import logo from "../../assets/logo.png"; 
+import logo from "../../assets/logo.png";
+import "../../styles/login.css";
 
 function AdminLogin() {
   const navigate = useNavigate();
@@ -54,8 +49,4 @@ function AdminLogin() {
   );
 }
 
-<<<<<<< HEAD
 export default AdminLogin;
-=======
-export default AdminLogin;
->>>>>>> 0181b91 (Dashboard-FE)
