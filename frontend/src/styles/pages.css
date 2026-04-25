@@ -1,7 +1,8 @@
 .page-shell {
   padding: 2rem 3rem 4rem;
   background:
-    radial-gradient(circle at top left, rgba(255, 206, 26, 0.28), transparent 28%),
+    radial-gradient(circle at top right, rgba(214, 207, 143, 0.3), transparent 45%),
+    radial-gradient(circle at bottom left, rgba(13, 8, 66, 0.05), transparent 45%),
     linear-gradient(180deg, #fffef7 0%, #f3f3f3 100%);
   min-height: calc(100vh - 100px);
 }
@@ -23,6 +24,19 @@
 
 .app-navbar-left {
   gap: 1.5rem;
+}
+
+.navbar-menu-icon {
+  color: #333;
+  transition: transform 0.2s ease;
+}
+
+body.dark-mode .navbar-menu-icon {
+  color: #fff;
+}
+
+.navbar-menu-icon:hover {
+  transform: scale(1.1);
 }
 
 .app-navbar-right {

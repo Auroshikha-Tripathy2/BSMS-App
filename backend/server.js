@@ -8,6 +8,7 @@ import bookRoutes from "./routes/books.js";
 import orderRoutes from "./routes/orders.js";
 import wishlistRoutes from "./routes/wishlist.js";
 import cartRoutes from "./routes/cart.js";
+import shopkeeperRoutes from "./routes/shopkeeperRoutes.js";
 
 // Load environment variables
 dotenv.config();
@@ -37,6 +38,7 @@ app.use("/api/books", bookRoutes);
 app.use("/api/orders", orderRoutes);
 app.use("/api/wishlist", wishlistRoutes);
 app.use("/api/cart", cartRoutes);
+app.use("/api/shopkeeper", shopkeeperRoutes);
 
 // Error handling for 404
 app.use("*", (req, res) => {

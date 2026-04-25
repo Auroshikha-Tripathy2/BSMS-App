@@ -1,15 +1,16 @@
 import React, { useState } from "react";
 import { useAuth } from "../hooks/useAuth";
+import { useTheme } from "../context/ThemeContext";
 import { Bell, Lock, Eye, Globe } from "lucide-react";
 import "../styles/pages.css";
 
 function Settings() {
   const { user, updateUser } = useAuth();
+  const { darkMode, toggleDarkMode } = useTheme();
   const [settings, setSettings] = useState({
     emailNotifications: true,
     orderUpdates: true,
     promotions: false,
-    darkMode: false,
   });
 
   const handleToggle = (key) => {
@@ -90,12 +91,15 @@ function Settings() {
           <div className="card-body">
             <div className="d-flex justify-content-between align-items-center">
               <span>Dark Mode</span>
-              <input
-                type="checkbox"
-                className="form-check-input"
-                checked={settings.darkMode}
-                onChange={() => handleToggle("darkMode")}
-              />
+              <div className="form-check form-switch">
+                <input
+                  type="checkbox"
+                  className="form-check-input"
+                  checked={darkMode}
+                  onChange={toggleDarkMode}
+                  style={{ cursor: "pointer" }}
+                />
+              </div>
             </div>
           </div>
         </div>

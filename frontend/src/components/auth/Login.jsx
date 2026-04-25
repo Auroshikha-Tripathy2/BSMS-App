@@ -1,9 +1,8 @@
 import "../../styles/login.css";
 import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import { User, Store } from "lucide-react";
 import { useAuth } from "../../hooks/useAuth";
-import logo from "../../assets/logo.png"; // ✅ fixed path
+import logo from "../../assets/logo.png";
 
 function Login() {
   const navigate = useNavigate();
@@ -11,8 +10,6 @@ function Login() {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [role, setRole] = useState("");
-  const [showOtp, setShowOtp] = useState(false);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
@@ -20,25 +17,18 @@ function Login() {
     e.preventDefault();
     setError("");
 
-    if (!email || !password || !role) {
-      setError("Please fill in all fields and select a role");
+    if (!email || !password) {
+      setError("Please fill in all fields");
       return;
     }
 
     setLoading(true);
-
     try {
       const result = await login(email, password);
-
       if (result.success) {
-        // Navigate based on role
-        if (result.role === "reader") {
-          navigate("/reader");
-        } else if (result.role === "owner") {
-          navigate("/shopkeeper");
-        } else {
-          navigate("/");
-        }
+        if (result.role === "reader") navigate("/");
+        else if (result.role === "owner") navigate("/");
+        else navigate("/");
       } else {
         setError(result.error || "Login failed");
       }
@@ -50,151 +40,64 @@ function Login() {
   };
 
   return (
-    <div className="login-page">
-      <div className="container-fluid">
-        <div className="row h-100">
+    <div className="auth-page">
+      {/* LEFT */}
+      <div className="auth-left">
+        <div className="auth-left-content">
+          <img src={logo} alt="ReadNest" />
+          <h2>Welcome back to ReadNest</h2>
+          <p>Discover, manage, and explore the world of books — all in one place.</p>
+          <ul className="auth-bullet">
+            <li>Browse thousands of books</li>
+            <li>Track your reading progress</li>
+            <li>Manage inventory &amp; orders</li>
+          </ul>
+        </div>
+      </div>
 
-          {/* LEFT */}
-          <div className="col-md-6 d-none d-md-flex left-panel">
-            <div style={{ padding: 100 }}>
-              <img
-                src={logo}
-                alt="logo"
-                className="logo mb-4"
-                style={{ width: "250px" }}
-              />
-
-              <h1 className="fw-bold">Welcome to ReadNest</h1>
-
-              <p className="mt-3">
-                Discover, manage, and explore the world of books.
-              </p>
-
-              <ul className="mt-4">
-                <li>Browse thousands of books</li>
-                <li>Manage inventory</li>
-                <li>Track analytics</li>
-              </ul>
-            </div>
+      {/* RIGHT */}
+      <div className="auth-right">
+        <div className="auth-box">
+          {/* Toggle */}
+          <div className="auth-toggle">
+            <button className="active">Login</button>
+            <button onClick={() => navigate("/register")}>Register</button>
           </div>
 
-          {/* RIGHT */}
-          <div className="col-md-6 col-12 d-flex align-items-center justify-content-center">
-            <div className="right-panel">
+          {/* Error */}
+          {error && <div className="auth-error">{error}</div>}
 
-              {/* TOGGLE */}
-              <div className="toggle">
-                <button className="active">Login</button>
-                <button onClick={() => navigate("/register")}>
-                  Register
-                </button>
-              </div>
+          {/* Form */}
+          <form className="auth-form" onSubmit={handleLogin}>
+            <label>Email Address</label>
+            <input
+              type="email"
+              placeholder="you@example.com"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              disabled={loading}
+            />
 
-              <form className="mt-4" onSubmit={handleLogin}>
+            <label>Password</label>
+            <input
+              type="password"
+              placeholder="••••••••"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              disabled={loading}
+            />
 
-                {error && (
-                  <div className="alert alert-danger" role="alert">
-                    {error}
-                  </div>
-                )}
+            <button type="submit" className="auth-submit-btn" disabled={loading}>
+              {loading ? "Logging in..." : "Login"}
+            </button>
+          </form>
 
-                <label>Email Address</label>
-                <input
-                  type="email"
-                  placeholder="you@example.com"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  disabled={showOtp || loading}
-                />
-               
-                {/* ROLE */}
-                {!showOtp && (
-                  <>
-
-                    <label>Password</label>
-                    <input
-                      type="password"
-                      placeholder="••••••••"
-                      value={password}
-                      onChange={(e) => setPassword(e.target.value)}
-                      disabled={loading}
-                    />
-
-                    <label className="mt-3">Select Role</label>
-
-                    <div className="role-container">
-                      <div
-                        className={`role ${role === "reader" ? "active" : ""}`}
-                        onClick={() => !loading && setRole("reader")}
-                      >
-                        <User size={28} />
-                        <span>Reader</span>
-                      </div>
-
-                      <div
-                        className={`role ${role === "owner" ? "active" : ""}`}
-                        onClick={() => !loading && setRole("owner")}
-                      >
-                        <Store size={28} />
-                        <span>Shop Owner</span>
-                      </div>
-                    </div>
-                  </>
-                )}
-
-                {/* OTP FIELD */}
-                {showOtp && (
-                  <>
-                    <label className="mt-3">Enter OTP</label>
-                    <input
-                      type="text"
-                      placeholder="Enter OTP"
-                      value={otp}
-                      onChange={(e) => setOtp(e.target.value)}
-                      disabled={loading}
-                    />
-                  </>
-                )}
-
-                {/* BUTTON */}
-                <button
-                  type="submit"
-                  className="login-btn mt-4"
-                  disabled={loading}
-                >
-                  {loading ? "Logging in..." : showOtp ? "Verify OTP" : "Login"}
-                </button>
-
-                {/* FORGOT PASSWORD */}
-                {!showOtp && (
-                  <p className="text-center mt-3">
-                    <span
-                      onClick={() => !loading && setShowOtp(true)}
-                      style={{
-                        cursor: loading ? "not-allowed" : "pointer",
-                        color: "#d4b100"
-                      }}
-                    >
-                      Forgot your password?
-                    </span>
-                  </p>
-                )}
-
-              </form>
-
-              {/* ADMIN LOGIN */}
-              <p className="text-center mt-3">
-                <Link
-                  to="/admin-login"
-                  style={{ textDecoration: "none", color: "#d4b100" }}
-                >
-                  Admin Login
-                </Link>
-              </p>
-
-            </div>
+          <div className="auth-footer">
+            Don't have an account? <Link to="/register">Register here</Link>
           </div>
-
+          <div className="auth-footer" style={{ marginTop: "0.5rem" }}>
+            <Link to="/admin-login">Admin Login</Link>
+          </div>
         </div>
       </div>
     </div>

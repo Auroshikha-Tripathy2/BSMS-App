@@ -39,10 +39,10 @@ function ReaderHub() {
             </p>
 
             <div className="hero-actions">
-              <Link to="/shops" className="btn btn-warning btn-lg">
+              <Link to="/shops" className="gz-cta-btn">
                 Browse Books
               </Link>
-              <Link to="/login" className="btn btn-outline-dark btn-lg">
+              <Link to="/login" className="gz-cta-btn-outline">
                 Sign In
               </Link>
             </div>

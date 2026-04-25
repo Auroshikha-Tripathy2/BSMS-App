@@ -1,33 +1,20 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import {
-  ClipboardList,
+import { 
+  LayoutDashboard, 
+  Package, 
+  Settings, 
   Store,
-  TrendingUp,
-  AlertTriangle,
-  CheckCircle,
-  Package,
+  ChevronRight
 } from "lucide-react";
-import { featuredBooks } from "../data/books";
-import { shopkeeperTasks, shopkeeperMetrics } from "../data/perspectives";
 import { useAuth } from "../hooks/useAuth";
+import ShopkeeperDashboard from "./ShopkeeperDashboard";
+import ShopkeeperInventory from "./ShopkeeperInventory";
 import "../styles/pages.css";
 
 function ShopkeeperHub() {
   const { isAuthenticated, user } = useAuth();
-
-  const [orders] = useState([
-    { id: "ORD-001", items: 3, total: 1299, status: "pending", customer: "John Doe" },
-    { id: "ORD-002", items: 2, total: 899, status: "shipped", customer: "Jane Smith" },
-    { id: "ORD-003", items: 1, total: 499, status: "delivered", customer: "Mike Johnson" },
-  ]);
-
-  const [inventory] = useState([
-    { ...featuredBooks[0], stock: 45, sold: 120 },
-    { ...featuredBooks[1], stock: 12, sold: 85 },
-    { ...featuredBooks[2], stock: 0, sold: 156 },
-    { ...featuredBooks[3], stock: 89, sold: 45 },
-  ]);
+  const [activeTab, setActiveTab] = useState("dashboard");
 
   // ================= UNAUTH VIEW =================
   if (!isAuthenticated) {
@@ -35,24 +22,41 @@ function ShopkeeperHub() {
       <div className="page-shell perspective-page">
         <section className="perspective-hero">
           <div className="hero-copy">
-            <span className="eyebrow">Shopkeeper Perspective</span>
-            <h1>Manage your bookstore efficiently.</h1>
-            <p>Track orders, inventory, and growth from one dashboard.</p>
+            <span className="eyebrow">Professional Store Management</span>
+            <h1>Scale your bookstore with smart analytics.</h1>
+            <p>A comprehensive dashboard for inventory tracking, order management, and sales growth.</p>
 
             <div className="hero-actions">
-              <Link to="/shops" className="btn btn-warning btn-lg">
-                View Catalog
+              <Link to="/shops" className="gz-cta-btn">
+                Browse Global Catalog
               </Link>
-              <Link to="/login" className="btn btn-outline-dark btn-lg">
-                Sign In
+              <Link to="/login" className="gz-cta-btn-outline">
+                Sign In to Dashboard
               </Link>
             </div>
           </div>
 
-          <div className="perspective-panel">
+          <div className="perspective-panel store-showcase">
             <div className="perspective-panel-head">
               <Store size={20} />
-              <span>Store Overview</span>
+              <span>Partner Ecosystem</span>
+            </div>
+            
+            <div className="p-4 text-center">
+              <div className="mb-4 text-muted">
+                <LayoutDashboard size={48} className="opacity-25 mb-3" />
+                <p>Advanced metrics and inventory tools become available once you sign in as a shopkeeper.</p>
+              </div>
+              <div className="d-flex flex-column gap-2">
+                <div className="p-3 bg-light rounded-3 text-start small">
+                  <strong>Inventory Control</strong>
+                  <p className="mb-0 text-muted">Real-time stock monitoring and low-stock alerts.</p>
+                </div>
+                <div className="p-3 bg-light rounded-3 text-start small">
+                  <strong>Sales Analytics</strong>
+                  <p className="mb-0 text-muted">Track wishlist frequency and cart additions.</p>
+                </div>
+              </div>
             </div>
           </div>
         </section>
@@ -60,110 +64,45 @@ function ShopkeeperHub() {
     );
   }
 
-  // ================= AUTH VIEW =================
   return (
-    <div className="page-shell">
-      {/* Header */}
-      <section className="section-block bg-light mb-4 p-4">
-        <div className="d-flex justify-content-between align-items-center">
-          <div>
-            <h1>Welcome, {user?.name}! 📊</h1>
-            <p className="text-muted">Store dashboard</p>
-          </div>
-        </div>
-      </section>
-
-      {/* Metrics */}
-      <div className="row g-3 mb-4">
-        {shopkeeperMetrics.map((m) => (
-          <div key={m.label} className="col-md-3">
-            <div className="card text-center shadow-sm">
-              <div className="card-body">
-                <p className="text-muted small">{m.label}</p>
-                <h3>{m.value}</h3>
-              </div>
+    <div className="page-shell bg-theme-main min-vh-100">
+      {/* Sub-Header / Navigation */}
+      <div className="sticky-top shadow-sm card-glass border-0 border-bottom border-secondary" style={{ top: "70px", zIndex: 100, backdropFilter: "blur(20px)" }}>
+        <div className="container-fluid px-4">
+          <div className="d-flex align-items-center justify-content-between py-2">
+            <div className="d-flex align-items-center gap-4">
+              <button 
+                className={`btn btn-link text-decoration-none px-0 py-2 d-flex align-items-center fw-bold transition-all ${activeTab === 'dashboard' ? 'text-theme-yellow border-bottom border-3 border-theme-yellow' : 'text-theme-muted'}`}
+                onClick={() => setActiveTab("dashboard")}
+              >
+                <LayoutDashboard size={18} className="me-2" /> Dashboard
+              </button>
+              <button 
+                className={`btn btn-link text-decoration-none px-0 py-2 d-flex align-items-center fw-bold transition-all ${activeTab === 'inventory' ? 'text-theme-yellow border-bottom border-3 border-theme-yellow' : 'text-theme-muted'}`}
+                onClick={() => setActiveTab("inventory")}
+              >
+                <Package size={18} className="me-2" /> Inventory
+              </button>
             </div>
-          </div>
-        ))}
-      </div>
-
-      <div className="row g-4">
-        {/* Orders */}
-        <div className="col-lg-8">
-          <section className="section-block">
-            <h4 className="mb-3 d-flex align-items-center">
-              <ClipboardList size={20} className="me-2" />
-              Orders
-            </h4>
-
-            <table className="table">
-              <thead>
-                <tr>
-                  <th>ID</th>
-                  <th>Customer</th>
-                  <th>Total</th>
-                  <th>Status</th>
-                </tr>
-              </thead>
-              <tbody>
-                {orders.map((o) => (
-                  <tr key={o.id}>
-                    <td>{o.id}</td>
-                    <td>{o.customer}</td>
-                    <td>₹{o.total}</td>
-                    <td>{o.status}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </section>
-
-          {/* Inventory */}
-          <section className="section-block">
-            <h4 className="mb-3 d-flex align-items-center">
-              <Package size={20} className="me-2" />
-              Inventory
-            </h4>
-
-            <div className="row g-3">
-              {inventory.map((book) => (
-                <div key={book.id} className="col-md-6">
-                  <div className="card p-2">
-                    <h6>{book.title}</h6>
-                    <small>{book.author}</small>
-                    <p>Stock: {book.stock}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </section>
-        </div>
-
-        {/* Sidebar */}
-        <div className="col-lg-4">
-          <div className="card mb-3">
-            <div className="card-header bg-danger text-white">
-              <AlertTriangle size={16} /> Alerts
-            </div>
-            <div className="card-body">
-              <p>Low stock items need restocking.</p>
-            </div>
-          </div>
-
-          <div className="card">
-            <div className="card-header">
-              <CheckCircle size={16} /> Tasks
-            </div>
-            <div className="card-body">
-              {shopkeeperTasks.map((task, i) => (
-                <div key={i}>
-                  <input type="checkbox" /> {task}
-                </div>
-              ))}
+            
+            <div className="d-flex align-items-center gap-2">
+              <span className="small text-theme-muted d-none d-md-inline">Store: <strong className="text-theme-header">{user?.shopName || "My Bookstore"}</strong></span>
+              <button className="btn btn-sm btn-glass rounded-circle p-2">
+                <Settings size={18} className="text-theme-muted" />
+              </button>
             </div>
           </div>
         </div>
       </div>
+
+      {/* Main Content Area */}
+      <main className="container-fluid px-4">
+        {activeTab === "dashboard" ? (
+          <ShopkeeperDashboard />
+        ) : (
+          <ShopkeeperInventory />
+        )}
+      </main>
     </div>
   );
 }
